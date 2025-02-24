@@ -5,8 +5,9 @@ import { io } from "socket.io-client";
 import { getUsers } from "../api/getUsers";
 import { getContacts } from "../api/getContacts";
 import { getMessages } from "../api/getMessages";
+import { BASE_URL } from "../config/constants";
 
-const socket = io("http://localhost:8000");
+const socket = io(BASE_URL);
 
 export default function ChatPage() {
   const [userData, setUserData] = useState<

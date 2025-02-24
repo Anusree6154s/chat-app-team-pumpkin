@@ -1,11 +1,8 @@
 import axios from "axios";
-
-// export const api = axios.create({
-//   baseURL: "http://localhost:8000/api",
-//   headers: { "Content-Type": "application/json" },
-// });
+import { BASE_URL } from "../config/constants";
 
 export const api = axios.create({
-  baseURL: "https://chat-app-team-pumpkin-server.vercel.app/",
+  baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
+
