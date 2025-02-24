@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/home-page.scss";
 import { signup } from "../api/signup";
 import { useNavigate } from "react-router-dom";
