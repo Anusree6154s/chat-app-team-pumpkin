@@ -72,3 +72,6 @@ mongoose
     server.listen(8000, () => console.log("Server running on port 8000"));
   })
   .catch((err) => console.log(err));
+
+  export const config = { maxDuration: 30 };
+  module.exports = app; 
