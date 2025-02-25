@@ -6,16 +6,16 @@ const router = require("./routes");
 const mongoose = require("mongoose");
 const { Message } = require("./models/message.model");
 const { User } = require("./models/user.model");
-require('dotenv').config()
-
-const frontendUrl = process.env.frontendUrl
-const mongodbAtlasUri = process.env.mongodbAtlasUri
+const path = require("path");
+require("dotenv").config();
 
 const app = express();
 const server = http.createServer(app);
 
 app.use(express.json());
-app.use(cors({ origin: frontendUrl }));
+app.use(cors());
+
+app.use(express.static(path.resolve(__dirname, "../../client/dist")));
 app.use("/api", router);
 
 const users = {};
@@ -69,12 +69,13 @@ io.on("connection", (socket) => {
   });
 });
 
+const mongodbAtlasUri = process.env.mongodbAtlasUri;
 mongoose
   .connect(mongodbAtlasUri)
   .then(() => {
     console.log("Database connected");
     server.listen(8000, () => console.log("Server running on port 8000"));
-    console.log('client requests are coming from ', frontendUrl)
+    console.log("client requests are coming from ", frontendUrl);
   })
   .catch((err) => console.log(err));
 
