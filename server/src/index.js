@@ -74,8 +74,9 @@ mongoose
   .then(() => {
     console.log("Database connected");
     server.listen(8000, () => console.log("Server running on port 8000"));
+    console.log('client requests are coming from ', frontendUrl)
   })
   .catch((err) => console.log(err));
 
-export const config = { maxDuration: 30 };
-module.exports = app;
+// export const config = { maxDuration: 30 };
+// module.exports = app;
