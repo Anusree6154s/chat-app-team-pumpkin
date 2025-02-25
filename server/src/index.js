@@ -6,12 +6,16 @@ const router = require("./routes");
 const mongoose = require("mongoose");
 const { Message } = require("./models/message.model");
 const { User } = require("./models/user.model");
+require('dotenv').config()
+
+const frontendUrl = process.env.frontendUrl
+const mongodbAtlasUri = process.env.mongodbAtlasUri
 
 const app = express();
 const server = http.createServer(app);
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: frontendUrl }));
 app.use("/api", router);
 
 const users = {};
@@ -66,12 +70,12 @@ io.on("connection", (socket) => {
 });
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/chatDB")
+  .connect(mongodbAtlasUri)
   .then(() => {
     console.log("Database connected");
     server.listen(8000, () => console.log("Server running on port 8000"));
   })
   .catch((err) => console.log(err));
 
-  export const config = { maxDuration: 30 };
-  module.exports = app; 
+export const config = { maxDuration: 30 };
+module.exports = app;
