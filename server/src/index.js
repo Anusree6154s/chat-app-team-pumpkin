@@ -70,6 +70,7 @@ io.on("connection", (socket) => {
 });
 
 const mongodbAtlasUri = process.env.mongodbAtlasUri;
+const frontendUrl = process.env.frontendUrl;
 mongoose
   .connect(mongodbAtlasUri)
   .then(() => {
