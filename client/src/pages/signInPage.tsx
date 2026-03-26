@@ -1,10 +1,9 @@
 import { useState } from "react";
 import "../styles/home-page.scss";
-import { signup } from "../api/signup";
+import { signin } from "../api/signin";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
-export default function HomePage() {
+export default function SigninPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
@@ -12,19 +11,11 @@ export default function HomePage() {
     phone: "",
   });
 
-  const handleSignup = async () => {
-    console.log("🚀 ~ handleSignup ~ form:", form);
-    try {
-      const data = await signup(form);
-      if (data.userId) {
-        localStorage.setItem("userId", data.userId);
-        navigate("/chat");
-      }
-    } catch (error: any) {
-      const message = error.response.data.message;
-      if (message) {
-        toast.error(message);
-      }
+  const handleSignin = async () => {
+    const data = await signin(form);
+    if (data.userId) {
+      localStorage.setItem("userId", data.userId);
+      navigate("/chat");
     }
   };
 
@@ -32,7 +23,16 @@ export default function HomePage() {
     <section className="home-page">
       <article className="form">
         <div className="form-inner">
-          <div className="image"></div>
+          <div
+            style={{
+              border: "1px solid transparent",
+              textAlign: "center",
+              fontWeight: "bold",
+              fontFamily: "Inter",
+            }}
+          >
+            Sign In
+          </div>
           <input
             type="text"
             placeholder="Name"
@@ -54,10 +54,11 @@ export default function HomePage() {
               setForm((prev) => ({ ...prev, phone: e.target.value }))
             }
           />
-          <button onClick={handleSignup}>Sign Up</button>
+          <button onClick={handleSignin}>Sign In</button>
+
           <p className="signin-footer">
-            <span>Already have an account? </span>
-            <a href="signin">Sign In</a>
+            <span>Not a member? </span>
+            <a href="/">Sign Up</a>
           </p>
         </div>
         <img
